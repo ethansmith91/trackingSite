@@ -1,5 +1,9 @@
 var Timer = require('../models/timers.js');
 
+// controllers for timmer
+// every path here assume logged in
+// authenticated should be handled in routes/routeConfigure.js
+
 function verifyUser(req){
 	if(req.user.fbId != req.params.userId)
 	{
@@ -83,9 +87,32 @@ exports.create = function(req,res){
 // req.body.newTime: newtime Length
 // req.body.current: current date
 exports.update = function(req,res){
+	// init value from request
+	var timerId = req.body.timerId;
+	var fbId = req.user.fbId;
+	var newTime = req.body.newTime;
+	var currentDate = req.body.currentDate;
 
+	// TODO: validate input
+
+	// Look up timer to update
+	var myTimer = Timer.findOne({'_id': timerId, 'fbUserId': fbId}, function(err,doc){
+		if(err)
+			res.send({title:'Error', message:'Timer not found'});
+		else{
+				// find if date already exist, it should be in the end
+				if(doc.dateToTime[doc.dateToTime.length - 1].date == currentDate)
+					doc.dateToTime[doc.dateToTime.length - 1].time += newTime;
+				// else, create new date with new time
+				else
+					doc.dateToTime.push({date: currentDate, time:newTime});
+				res.send(doc);
+			}
+		}
+	})
 };
 
+// TODO
 exports.delete = function(req, res){
 
 };

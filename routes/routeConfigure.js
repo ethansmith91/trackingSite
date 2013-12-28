@@ -19,6 +19,7 @@ exports.mapRoute = function(app, prefix){
 	//end test
 
 	app.post('/timers/create', prefixObj.create);
+	app.post('/timers/update', prefixObj.update);
 	app.get('/timers/:userId', prefixObj.showAll);
 	app.get('/timers/:userId/:subject/:testType', prefixObj.show);
 };
