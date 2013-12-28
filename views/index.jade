@@ -1,0 +1,11 @@
+extends layout
+
+block content
+	h1= title
+	p Welcome to #{title}
+	if !user
+		a(href="http://localhost:3000/auth/facebook") Login Here
+	else
+		a(href="http://localhost:3000/logout") Logout Here
+	</br>
+	a(href="http://localhost:3000/timers/new") New Timer here

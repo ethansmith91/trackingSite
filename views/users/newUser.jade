@@ -1,0 +1,16 @@
+extends layout
+doctype 5
+html(lang="en")
+	#container
+		head
+			title #{title}
+		body
+			form(method="POST" action="http://localhost:3000/users/create")
+				p username
+				input(type="text" name="username")
+				p password
+				input(type="password" name="password")
+				p sn
+				input(type="text" name="usersn")
+				input(type="submit" value="submit")
+

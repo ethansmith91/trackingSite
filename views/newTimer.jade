@@ -1,0 +1,14 @@
+html
+	#container
+		head
+			title New Timer
+		body
+			form(method="POST" action="http://localhost:3000/timers/create")
+				p Timer name
+				input(type="text" name="name")
+				p Subject
+				input(type="text" name="subject")
+				p Test Type
+				input(type="text" name="testType")
+				input(type="submit" value="submit")
+
