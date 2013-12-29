@@ -1,0 +1,29 @@
+.page-header{
+	text-align: center;
+}
+
+#container{
+	background-color: #555555;
+}
+
+#about{
+	padding: 30px;
+	margin-bottom: 30px;
+	font-size: 21px;
+	font-weight: 200;
+	line-height: 2.1428571435;
+	color: inherit;
+}
+
+#about h1{
+	line-height: 1;
+}
+
+#about p{
+	line-height: 1.4;
+}
+
+h1, p{
+	color : #EFEBD6;
+	font-family: "Helvetica", Arial, sans-serif;
+}

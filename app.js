@@ -11,6 +11,7 @@ var http = require('http');
 var path = require('path');
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
+var authenticateRoute = require('./routes/authenticate');
 var FacebookUser = require('./models/facebookUsers.js');
 var User = require('./models/users.js');
 var Timer = require('./models/timers.js');
@@ -114,27 +115,15 @@ passport.deserializeUser(function(id,done){
 // TODO : FIX mapRoute to type specific
 prefix = "users";
 
-//login route
-app.get("/auth/facebook", passport.authenticate("facebook", {scope: "email"}));
-app.get("/auth/facebook/callback",
-	passport.authenticate("facebook", {failureRedirect: '/login'}),
-	function(req,res){
-		res.redirect("users/" + req.user.fbId);
-		//res.render("users/show", {title: 'Welcome User', user: req.user});
-	}
-);
-
-//logout route
-app.get("/logout", function(req,res){
-	req.logout();
-	res.redirect('/');
-})
+// map authentication
+authenticateRoute.mapRoute(app);
 
 // index and other modules routing
-app.get('/', routes.index);
 user.mapRoute(app,prefix);
-routeConfigure.mapRoute(app, prefix);
-
+routeConfigure.mapRoute(app);
+app.get('/*', function(req,res){
+	res.sendfile(__dirname + '/public/shell.html');
+});
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

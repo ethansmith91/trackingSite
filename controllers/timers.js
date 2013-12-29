@@ -23,7 +23,7 @@ exports.show = function(req,res){
 		res.send({title:'Error', message:'Access denied'});
 		return;
 	}
-	Timer.findOne({
+	Timer.find({
 		'fbUserId': req.params.userId,
 		'subject.subjectTitle': req.params.subject,
 		'subject.testTitle': req.params.testType}, 
@@ -64,8 +64,6 @@ exports.create = function(req,res){
 	var subject = req.body.subject;
 	var testType = req.body.testType;
 	var name = req.body.name;
-	console.log(subject);
-	console.log(testType);
 	// TODO : validate subject and testType
 
 	var newTimer = new Timer({
@@ -80,13 +78,13 @@ exports.create = function(req,res){
 	res.send(newTimer);
 };
 
-// request to update existing timer
+// request to update time to existing timer
 // POST request
 // req.user.fbId: id
 // req.body.timerId: timerId
 // req.body.newTime: newtime Length
 // req.body.current: current date
-exports.update = function(req,res){
+exports.updateTime = function(req,res){
 	// init value from request
 	var timerId = req.body.timerId;
 	var fbId = req.user.fbId;
@@ -109,7 +107,7 @@ exports.update = function(req,res){
 				res.send(doc);
 			}
 		}
-	})
+	);
 };
 
 // TODO

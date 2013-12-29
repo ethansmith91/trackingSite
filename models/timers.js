@@ -5,6 +5,7 @@ var ObjectId = Schema.ObjectId;
 // TODO: add name
 var TimerSchema = new mongoose.Schema({
 	fbUserId: {type: String, require: true}, // id of the facebookuser associated
+	//ocalId: {type: Number, require: true},
 	name: {type: String, require: true},
 	dateOfCreation : {type: Date, default: Date.now},
 	totalLength : {type: Number, min: 0},
