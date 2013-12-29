@@ -20,11 +20,17 @@ exports.mapRoute = function(app)
 	})
 
 	// api to get user
-	app.get("/api/isAuthenticate", function(req, res){
+	app.get("/api/isLoggedIn", function(req, res){
 		res.set('Content-Type', 'json');
 		if(req.user)
-			res.send({isAuthenticate: 'true'});
+		{
+			console.log("IM LOGGED " + req.user.name);
+			res.send({isLoggedIn: 'true'});
+		}
 		else
-			res.send({isAuthenticate: 'false'});
+		{
+			console.log("IM NOT BRO");
+			res.send({isLoggedIn: 'false'});
+		}
 	});
 }

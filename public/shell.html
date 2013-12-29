@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="coreModule">
   <head>
-    <title>Bootstrap 101 Template</title>
+    <title>Tracking Site</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -13,8 +13,15 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jQuery.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/angularFull.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+    <script src="js/modules/coreModule/coreModule.js"></script>
   </head>
-  <body id="container">
+  <body id="container" ng-controller="AuthenticateController">
     <div>
       <div class="page-header">
         <h1> Test Tracking Site </h1>
@@ -24,22 +31,17 @@
         <li class="active"><a href="#"> About</a></li>
         <li> <a href="#profile">Profile</a></li>
         <li> <a href="#timer">Timer</a></li>
-        <li> <a href="/auth/facebook">Login</a></li>
+        <li ng-hide="isLoggedIn"> <a href="/auth/facebook">Login</a></li>
+        <li ng-show="isLoggedIn"> <a href="/logout">Logout</a></li>
       </div>
-      <div id="about">
+      <div ng-hide="isLoggedIn" id="about">
           <h1> Welcome to Self Tracking Site </h1>
           <p> We provide timer and test progress tracker with data visualization and 
             tool for motivation using social network with peer to peer model of encouragement 
             to help you keep track and motivate yourself in studying for standardized tests </p>
       </div>
-      <div class="shell">
+      <div ng-view>
       </div>
     </div>
-
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="js/jQuery.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
   </body>
 </html>
