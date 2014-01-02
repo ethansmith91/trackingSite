@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html ng-app="coreModule">
+<html ng-app="appModule">
   <head>
     <title>Tracking Site</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/myStyle.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -19,26 +19,29 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/angularFull.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
-    <script src="js/modules/coreModule/coreModule.js"></script>
+    <script src="js/modules/coreModule.js"></script>
+    <script src="js/modules/clockModule.js"></script>   
+    <script src="js/modules/appModule.js"></script>
   </head>
-  <body id="container" ng-controller="AuthenticateController">
+  <body id="container">
     <div>
       <div class="page-header">
         <h1> Test Tracking Site </h1>
       </div>
 
-      <div class="nav nav-pills">
-        <li class="active"><a href="#"> About</a></li>
-        <li> <a href="#profile">Profile</a></li>
-        <li> <a href="#timer">Timer</a></li>
-        <li ng-hide="isLoggedIn"> <a href="/auth/facebook">Login</a></li>
-        <li ng-show="isLoggedIn"> <a href="/logout">Logout</a></li>
-      </div>
-      <div ng-hide="isLoggedIn" id="about">
-          <h1> Welcome to Self Tracking Site </h1>
-          <p> We provide timer and test progress tracker with data visualization and 
-            tool for motivation using social network with peer to peer model of encouragement 
-            to help you keep track and motivate yourself in studying for standardized tests </p>
+      <div id="introPage" ng-controller="AuthenticateController">
+        <div class="nav nav-pills">
+          <li class="active"><a href="#"> About</a></li>
+          <li> <a href="#profile">Profile</a></li>
+          <li> <a class="dropdown-toggle" data-toggle="dropdown">Timer <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="#timers/new"> New Timer</a></li>
+              <li><a href="#timers/show"> Show Timer</a></li>
+            </ul>
+          </li>
+          <li ng-hide="isLoggedIn"> <a href="/auth/facebook">Login</a></li>
+          <li ng-show="isLoggedIn"> <a href="/logout">Logout</a></li>
+        </div>
       </div>
       <div ng-view>
       </div>

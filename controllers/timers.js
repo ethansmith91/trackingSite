@@ -11,27 +11,37 @@ function verifyUser(req){
 	}
 	return true;
 }
+
+function compareDate(d1, d2){
+	if(d1.toLocaleDateString() == d2)
+		return true;
+	return false;
+}
 // request to read time
 // this is a get request
 // req.params.userId : id of users
-// req.params.subject: subject
-// req.params.testType: type of test
+// req.params.localId : localId of timer
 // return: if error: title, message, else, json of timer
 exports.show = function(req,res){
+	/*
 	if(req.user.fbId != req.params.userId)
 	{
 		res.send({title:'Error', message:'Access denied'});
 		return;
-	}
+	}*/
+	console.log("local ID " + req.params.localId);
 	Timer.find({
-		'fbUserId': req.params.userId,
-		'subject.subjectTitle': req.params.subject,
-		'subject.testTitle': req.params.testType}, 
+		'fbUserId': req.user.fbId,
+		'localId': req.params.localId
+	}, 
 		function(err, doc){
 			if(!doc)
-				res.send({title:'Error', message:'Timer not found'});
+				res.json({title:'Error', message:'Timer not found'});
 			else
-				res.send(doc);
+			{
+				//console.log(doc);
+				res.json(JSON.stringify(doc));
+			}
 		});
 };
 
@@ -39,16 +49,17 @@ exports.show = function(req,res){
 // GET
 // req.params.userId: id of users
 exports.showAll = function(req,res){
+	/*
 	if(!verifyUser(req))
 	{
 		res.send({title:'Error', message:'Access denied'});
 		return;
-	}
-	Timer.find({'fbUserId': req.params.userId}, function(err,doc){
+	}*/
+	Timer.find({'fbUserId': req.user.fbId}, function(err,doc){
 		if(!doc)
-			res.send({title:'Error', message:'Timer not found'});
+			res.json({title:'Error', message:'Timer not found'});
 		else
-			res.send(doc);
+			res.json(JSON.stringify(doc));
 	});
 };
 
@@ -64,18 +75,25 @@ exports.create = function(req,res){
 	var subject = req.body.subject;
 	var testType = req.body.testType;
 	var name = req.body.name;
+	console.log("Name is " + name);
+	var localId = name + "-" + subject + "-" + testType + parseInt(Math.floor(Math.random() * 1000));
 	// TODO : validate subject and testType
 
 	var newTimer = new Timer({
 		fbUserId: id,
+		localId: localId,
 		name: name,
 		totalLength: 0,
 		subject: {subjectTitle: subject, testTitle: testType}
 	});
 	newTimer.save(function(err,newTimer){
 		if(err) throw err;
+		else
+		{
+			console.log("SAVED SUCCESS");
+			res.json(newTimer);
+		}
 	});
-	res.send(newTimer);
 };
 
 // request to update time to existing timer
@@ -94,17 +112,21 @@ exports.updateTime = function(req,res){
 	// TODO: validate input
 
 	// Look up timer to update
-	var myTimer = Timer.findOne({'_id': timerId, 'fbUserId': fbId}, function(err,doc){
+	var myTimer = Timer.findOne({'localId': timerId, 'fbUserId': fbId}, function(err,doc){
 		if(err)
 			res.send({title:'Error', message:'Timer not found'});
 		else{
+				doc.totalLength = newTime;
+				if(doc.dateToTime.length == 0)
+					doc.dateToTime.push({date: currentDate, time:newTime});
 				// find if date already exist, it should be in the end
-				if(doc.dateToTime[doc.dateToTime.length - 1].date == currentDate)
+				if(compareDate(doc.dateToTime[doc.dateToTime.length - 1].date,currentDate))
 					doc.dateToTime[doc.dateToTime.length - 1].time += newTime;
 				// else, create new date with new time
 				else
 					doc.dateToTime.push({date: currentDate, time:newTime});
-				res.send(doc);
+				doc.save();
+				res.json(doc);
 			}
 		}
 	);

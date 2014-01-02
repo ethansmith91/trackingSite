@@ -27,3 +27,22 @@ h1, p{
 	color : #EFEBD6;
 	font-family: "Helvetica", Arial, sans-serif;
 }
+
+#newForm {
+	text-align: center;
+	padding: 32px 16px 32px 16px;
+}
+
+a:link {text-decoration:none;}
+a:visited {text-decoration:none;}
+a:hover {
+	text-decoration:none;
+	font-size: 16px;
+}
+
+#timersViewerContainer{
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 24px;
+}
+a:active {text-decoration:none;}

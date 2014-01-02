@@ -1,0 +1,23 @@
+<div class="container">
+	<div class="row">
+		<div class="clock col-md-4 col-md-offset-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title"> Current Total Time</h3>
+				</div>
+				<div class="panel-body">
+					<t> {{hours}}:{{minutes}}:{{seconds}}</t>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="clockButton col-md-4 col-md-offset-4">
+			<div class="btn-group">
+				<button type="button" class="btn btn-default" ng-click="start()"> Start </button>
+				<button type="button" class="btn btn-default" ng-click="pause()"> Stop </button>
+			</div>
+		</div>
+	</div>
+</div>

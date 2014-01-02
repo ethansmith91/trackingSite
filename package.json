@@ -1,5 +1,5 @@
 {
-  "name": "application-name",
+  "name": "StudyTracker",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -8,7 +8,31 @@
   "dependencies": {
     "express": "3.4.5",
     "jade": "*",
-    "mongoose" : ">= 2.6.5",
-    "mongodb" : ">= 0.0.1"
-  }
+    "mongoose": ">= 2.6.5",
+    "mongodb": ">= 1.3.23",
+    "passport": ">= 0.1.17",
+    "passport-facebook": ">= 1.0.2"
+  },
+  "description": "Application used to track the progress of selfstudy and motivate user by active engagement",
+  "main": "app.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ethansmith91/trackingSite.git"
+  },
+  "keywords": [
+    "study",
+    "tracker",
+    "socialnetwork",
+    "engage",
+    "selfstudy",
+    "MCAT",
+    "SAT"
+  ],
+  "author": "Phuoc (Ethan)",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/ethansmith91/trackingSite/issues"
+  },
+  "homepage": "https://github.com/ethansmith91/trackingSite"
 }

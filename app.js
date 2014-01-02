@@ -70,7 +70,7 @@ passport.use(new FacebookStrategy({
 				});
 			}
 		});
-
+		/*
 		// for testing
 		Timer.remove({fbUserId: profile.id}, function(err){
 			if(err) throw err;
@@ -87,7 +87,7 @@ passport.use(new FacebookStrategy({
 					if(err) throw err;
 				});
 			}
-		});
+		});*/
 
 		// end testing TODO: REMOVE
 	}
@@ -121,7 +121,7 @@ authenticateRoute.mapRoute(app);
 // index and other modules routing
 user.mapRoute(app,prefix);
 routeConfigure.mapRoute(app);
-app.get('/*', function(req,res){
+app.get('/', function(req,res){
 	res.sendfile(__dirname + '/public/shell.html');
 });
 

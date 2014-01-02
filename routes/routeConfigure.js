@@ -21,6 +21,6 @@ exports.mapRoute = function(app){
 	// api for Timers
 	app.post('/api/timers/create', prefixObj.create);
 	app.post('/api/timers/updateTime', prefixObj.updateTime);
-	app.get('/api/timers/:userId', prefixObj.showAll);
-	app.get('/api/timers/:userId/:subject/:testType', prefixObj.show);
+	app.get('/api/timers', prefixObj.showAll);
+	app.get('/api/timers/:localId', prefixObj.show);
 };

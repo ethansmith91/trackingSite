@@ -1,0 +1,22 @@
+<form name="newTimerForm">
+	Timer Name: <input name="Timer Name" ng-model="name" required>
+	<span class="error" ng-show="myForm.input.$error.required"> Required!!!</span><br>
+	<div class="btn-group">
+		<button type="button" class ="btn btn-default" data-toggle="dropdown">
+		</button>
+		<ul class="dropdown-menu" role="menu" ng-model="subject">
+			<li value="MCAT"> MCAT </li>
+			<li value="SAT"> SAT </li>
+		</ul>
+	</div>
+	<div class="btn-group">
+		<button type="button" class ="btn btn-default" data-toggle="dropdown">
+		</button>
+		<ul class="dropdown-menu" role="menu" ng-model="testType">
+			<li value="Verbal"> Verbal </li>
+			<li value="Chemistry"> Chemistry </li>
+			<li value="Biology"> Biology </li>
+			<li value="Physics"> Physics </li>
+		</ul>
+	</div>
+</form>

@@ -1,0 +1,17 @@
+<div class="container" id="timersViewerContainer">
+	<div class="row panel panel-default">
+		<div class="panel-heading"> Your Timers </div>
+		<div class="panel-body">
+			<input type="text" ng-model="filterName">
+		</div>
+		<ul class="list-group col-md-4" ng-repeat="timer in timers |filter:filterName">
+			<li class="list-group-item"> Name: {{timer.name}} </li>
+			<li class="list-group-item"> Total Time: {{timer.totalLength}} seconds</li>
+			<li class="list-group-item"> Subject: {{timer.subject.subjectTitle}} </li>
+			<li class="list-group-item"> Test Title: {{timer.subject.testTitle}} </li>
+			<li class="list-group-item">
+				<a href="#/timers/{{timer.localId}}"> Select </a>
+			</li>
+		</ul>
+	</div>
+</div>
